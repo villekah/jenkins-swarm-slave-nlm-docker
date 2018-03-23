@@ -22,9 +22,13 @@ RUN \
     software-properties-common \
     sudo \
     x11vnc \
-    Xvfb && \
+    Xvfb \
+    python-pip && \
   update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
   rm -rf /var/lib/apt/lists/*
+
+RUN \
+  pip install awscli --upgrade
 
 # From: https://docs.docker.com/engine/installation/linux/docker-ce/debian/#install-using-the-repository
 #==============
@@ -45,6 +49,14 @@ RUN \
     gnupg2 \
     docker-ce=17.06.0~ce-0~debian && \
   rm -rf /var/lib/apt/lists/*
+
+# From: https://docs.docker.com/compose/install/#install-compose
+#==============
+# Docker compose
+#=============
+RUN \
+  curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
+  chmod +x /usr/local/bin/docker-compose
 
 # From: https://registry.hub.docker.com/u/selenium/node-base/dockerfile/
 #===============
