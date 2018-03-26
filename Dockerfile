@@ -130,8 +130,6 @@ RUN \
   ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 ENV TZ Europe/Helsinki
 
-USER jenkins-slave
-
 COPY jenkins-slave.sh /usr/local/bin/jenkins-slave.sh
 COPY bowerrc /home/jenkins-slave/.bowerrc
 
