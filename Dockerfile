@@ -108,7 +108,7 @@ ENV HOME /home/jenkins-slave
 
 RUN \
   useradd -c "Jenkins Slave user" -d $HOME -m jenkins-slave && \
-  usermod -a -G sudo jenkins-slave && \
+  usermod -a -G sudo,docker jenkins-slave && \
   echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/jenkins-slave && \
   curl --create-dirs -sSLo /usr/share/jenkins/swarm-client-$JENKINS_SWARM_VERSION-jar-with-dependencies.jar \
     https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/$JENKINS_SWARM_VERSION/swarm-client-$JENKINS_SWARM_VERSION-jar-with-dependencies.jar && \
