@@ -11,18 +11,13 @@ RUN \
   apt-get update && \
   apt-get -y install \
     build-essential \
-    iceweasel \
-    imagemagick \
     git \
-    iceweasel \
     locales \
     lsb-release \
     maven \
     rsync \
     software-properties-common \
     sudo \
-    x11vnc \
-    Xvfb \
     python-pip && \
   update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
   rm -rf /var/lib/apt/lists/*
@@ -58,51 +53,6 @@ RUN \
   curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
   chmod +x /usr/local/bin/docker-compose
 
-# From: https://registry.hub.docker.com/u/selenium/node-base/dockerfile/
-#===============
-# Google Chrome
-#===============
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-  && apt-get update -qqy \
-  && apt-get -qqy install \
-    google-chrome-stable \
-  && rm /etc/apt/sources.list.d/google-chrome.list \
-  && rm -rf /var/lib/apt/lists/*
-
-#==================
-# Chrome webdriver
-#==================
-ENV CHROME_DRIVER_VERSION 2.14
-RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
-  && rm -rf /opt/selenium/chromedriver \
-  && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
-  && rm /tmp/chromedriver_linux64.zip \
-  && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-  && chmod 755 /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-  && ln -fs /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION /usr/bin/chromedriver
-
-# Leiningen
-ENV LEIN_ROOT 1
-RUN curl -L -s https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > \
-    /usr/local/bin/lein \
- && chmod 0755 /usr/local/bin/lein \
- && lein upgrade
-
-# Node
-# Install Node.js, Bower, Grunt, Gulp
-RUN \
-  curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
-  apt-get -y install nodejs && \
-  npm install -g npm@2.5.1 && \
-  npm install -g bower@1.3.12 && \
-  npm install -g grunt-cli@0.1.13 && \
-  npm install -g gulp@3.8.11 && \
-  npm install -g nightwatch@0.9.16 && \
-  echo 'export PATH="node_modules/.bin:$PATH"' >> /root/.bashrc && \
-  echo 'export PATH="node_modules/.bin:$PATH"' >> /etc/skel/.bashrc && \
-  chmod o+w -R /usr/local # Allow write for npm installs -g 
-
 ENV JENKINS_SWARM_VERSION 2.2
 ENV HOME /home/jenkins-slave
 
@@ -131,10 +81,12 @@ RUN \
 ENV TZ Europe/Helsinki
 
 COPY jenkins-slave.sh /usr/local/bin/jenkins-slave.sh
-COPY bowerrc /home/jenkins-slave/.bowerrc
+RUN chmod 777 /usr/local/bin/jenkins-slave.sh
 
 VOLUME /home/jenkins-slave
 
 WORKDIR /home/jenkins-slave
+
+USER root
 
 ENTRYPOINT ["/usr/local/bin/jenkins-slave.sh"]
