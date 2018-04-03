@@ -132,12 +132,9 @@ ENV TZ Europe/Helsinki
 
 COPY jenkins-slave.sh /usr/local/bin/jenkins-slave.sh
 COPY bowerrc /home/jenkins-slave/.bowerrc
-RUN chmod 777 /usr/local/bin/jenkins-slave.sh
 
 VOLUME /home/jenkins-slave
 
 WORKDIR /home/jenkins-slave
-
-USER jenkins-slave
 
 ENTRYPOINT ["/usr/local/bin/jenkins-slave.sh"]
