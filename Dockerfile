@@ -18,6 +18,7 @@ RUN \
     rsync \
     software-properties-common \
     sudo \
+    jq \
     python-pip && \
   update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
   rm -rf /var/lib/apt/lists/*
