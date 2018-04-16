@@ -54,6 +54,14 @@ RUN \
   curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
   chmod +x /usr/local/bin/docker-compose
 
+# From: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html
+#==============
+# ecs-cli
+#=============
+RUN \
+  curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest && \
+  chmod +x /usr/local/bin/ecs-cli
+
 ENV JENKINS_SWARM_VERSION 2.2
 ENV HOME /home/jenkins-slave
 
