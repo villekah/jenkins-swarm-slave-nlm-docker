@@ -6,7 +6,7 @@ Jenkins Swarmer slave with Maven, Xvfb and Graphviz
 # Building
 
 ```bash
-docker build . -t villekah/jenkins-swarm-slave-nlm-docker:latest
+docker build . -t villekah/jenkins-swarm-slave-nlm-docker:dtjenkins
 ```
 
 # Running
@@ -17,7 +17,7 @@ myjenkins is running in the same Docker container
 docker run --rm -e "JAVA_OPTS=-Dfile.encoding=UTF8 -Xmx2G" \
 -v /var/run/docker.sock:/var/run/docker.sock \
 --network dnet1 \
-villekah/jenkins-swarm-slave-nlm-docker:latest \
+villekah/jenkins-swarm-slave-nlm-docker:dtjenkins \
 -master http://myjenkins:8080 \
 -username jenkins \
 -password jenkins \
