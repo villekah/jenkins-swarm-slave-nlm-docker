@@ -27,4 +27,5 @@ docker run -i -t --rm \
   villekah/jenkins-swarm-slave-nlm-docker:dtjenkins \
   -master ${MASTER} \
   -username ${USERNAME} -password ${PASSWORD} \
-  -executors 1
+  -executors 1 \
+  -disableSslVerification
