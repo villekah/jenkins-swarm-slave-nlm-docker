@@ -7,8 +7,6 @@ echo "Usage: ./${0##*/} <master-url> <jenkins-master-username> <jenkins-master-p
 echo "Network is the fourth parameter and optional. For example: dnet1."
 echo
 
-docker build . --tag villekah/jenkins-swarm-slave-nlm-docker:dtjenkins
-
 MASTER=${1:?Master url is the first required parameter. For example: http://192.168.50.100:8080.}
 USERNAME=${2:?Username (for the master) is the second required parameter.}
 PASSWORD=${3:?Password (for the master) is the third required parameter.}

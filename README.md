@@ -6,12 +6,16 @@ Jenkins Swarmer slave with Maven, Xvfb and Graphviz
 # Building
 
 ```bash
-docker build . -t villekah/jenkins-swarm-slave-nlm-docker:dtjenkins
+docker build . --tag villekah/jenkins-swarm-slave-nlm-docker:dtjenkins
+```
+or with the script
+```bash
+./build.sh
 ```
 
 # Running
 
-myjenkins is running in the same Docker container
+If jenkins is running in the same Docker container give same network name as it has ie. dnet1
 
 ```bash
 docker run --rm -e "JAVA_OPTS=-Dfile.encoding=UTF8 -Xmx2G" \
@@ -26,14 +30,16 @@ villekah/jenkins-swarm-slave-nlm-docker:dtjenkins \
 
 # Or with the script
 
-
 ```bash
-Usage: ./build-and-run.sh <master-url> <jenkins-master-username> <jenkins-master-password> [network]
+Usage: ./run.sh <master-url> <jenkins-master-username> <jenkins-master-password> [network]
 Network is the fourth parameter and optional. For example: dnet1.
 
-./build-and-run.sh \
+./start-slave.sh \
 http://myjenkins:8080 \
 jenkins \
 jenkins \
 dnet1
+
+or Daemon with same parameters
+./start-slave-daemon.sh ...
 ```
