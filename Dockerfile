@@ -80,8 +80,6 @@ RUN \
   ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 ENV TZ Europe/Helsinki
 
-USER jenkins-slave
-
 COPY jenkins-slave.sh /usr/local/bin/jenkins-slave.sh
 RUN chmod 777 /usr/local/bin/jenkins-slave.sh
 
