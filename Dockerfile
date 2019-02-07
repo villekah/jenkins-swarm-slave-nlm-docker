@@ -10,6 +10,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN \
   apt-get update && \
   apt-get -y install \
+    apt-transport-https \
     build-essential \
     git \
     locales \
