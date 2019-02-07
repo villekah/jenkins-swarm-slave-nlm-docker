@@ -14,7 +14,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then
   PARAMS="${PARAMS} -labels maven -labels graphviz"
 
   echo Running java $JAVA_OPTS -jar $JAR -fsroot $HOME $PARAMS "$@"
-  exec java $JAVA_OPTS -jar $JAR -fsroot $HOME $PARAMS "$@"
+  exec java $JAVA_OPTS -jar $JAR -disableSslVerification -fsroot $HOME $PARAMS "$@"
 fi
 
 # As argument is not jenkins, assume user want to run his own process, for sample a `bash` shell to explore this image
