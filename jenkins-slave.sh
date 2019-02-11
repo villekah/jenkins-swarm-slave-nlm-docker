@@ -11,7 +11,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then
     PARAMS="-master http://$JENKINS_PORT_8080_TCP_ADDR:$JENKINS_PORT_8080_TCP_PORT"
   fi
 
-  PARAMS="${PARAMS} -labels maven -labels graphviz"
+  PARAMS="${PARAMS} -labels maven -labels graphviz -labels dateutils"
 
   echo Running java $JAVA_OPTS -jar $JAR -fsroot $HOME $PARAMS "$@"
   exec java $JAVA_OPTS -jar $JAR -disableSslVerification -fsroot $HOME $PARAMS "$@"

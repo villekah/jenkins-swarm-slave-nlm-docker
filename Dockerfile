@@ -12,6 +12,7 @@ RUN \
   apt-get -y install \
     apt-transport-https \
     build-essential \
+    dateutils \
     git \
     locales \
     lsb-release \
