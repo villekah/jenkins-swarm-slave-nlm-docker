@@ -27,5 +27,6 @@ docker run -d --restart=always \
   villekah/jenkins-swarm-slave-nlm-docker:dtjenkins \
   -master ${MASTER} \
   -username ${USERNAME} -password ${PASSWORD} \
+  -labels java8 \
   -executors 1 \
   -disableSslVerification
